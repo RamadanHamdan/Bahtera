@@ -14,6 +14,7 @@
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
     --text-muted: #71717a;
+    --text-black: #000000;
 
     --accent-primary: #3b63c6;
     /* Indigo */
@@ -138,7 +139,7 @@ a {
 
 .btn-primary {
     background-color: var(--accent-primary);
-    color: #fff;
+    color: rgb(255, 255, 255);
     box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
 }
 
@@ -181,17 +182,17 @@ a {
     z-index: 1000;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: #919ccf;
+    border: 0px solid rgba(255, 255, 255, 0.6);
     border-radius: 9999px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
     transition: var(--transition-normal);
 }
 
-.nav-scrolled {
-    background: rgba(255, 255, 255, 0.95);
+/* .nav-scrolled {
+    background: #6986c6;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .nav-container {
     max-width: 100%;
@@ -287,7 +288,7 @@ a {
 
 /* Hero Section */
 .hero {
-    min-height: calc(100vh - 2rem);
+    min-height: calc(100vh - 1.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -331,7 +332,7 @@ a {
 
 .hero-subtitle {
     font-size: clamp(1.125rem, 2vw, 1.5rem);
-    color: var(--text-secondary);
+    color: var(--text-black);
     max-width: 600px;
     margin: 0 auto var(--spacing-md);
 }

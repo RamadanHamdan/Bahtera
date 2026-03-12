@@ -9,6 +9,7 @@ import pengadaanImg from "@/assets/images/pengadaan.png";
 import purnajualImg from "@/assets/images/purnajual.png";
 import pelatihanImg from "@/assets/images/pelatihan.png";
 import bahteraImg from "@/assets/images/bahtera.png";
+import bahtera1Img from "@/assets/images/bahtera1.png";
 import bgBahteraImg from "@/assets/images/bg-bahtera.jpg";
 import bgBahtera2Img from "@/assets/images/bg-bahtera2.jpg";
 import bgBahtera9Img from "@/assets/images/bg-bahtera9.jpg";
@@ -143,15 +144,15 @@ export default function Home() {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              backgroundBlendMode: 'overlay',
+              backgroundBlendMode: 'inherit',
               backgroundColor: 'rgba(37, 45, 104, 0.8)',
             }}
           >
             {/* Hero Image */}
-            <div className="fade-in delay-4 items-center">
+            <div className="fade-in mt-1! delay-4 items-center">
               <ScrollReveal>
                 <div className="w-full flex justify-center">
-                  <HeroImage alt="Company Profile Image" src={bahteraImg.src} className="w-[420px] md:w-[350px] h-auto mb-1! mt-2! object-contain" />
+                  <HeroImage alt="Company Profile Image" src={bahtera1Img.src} className="w-[420px] md:w-[350px] h-auto mb-1! mt-2! object-contain" />
                 </div>
                 <p className="hero-subtitle fade-in-up delay-2 mt-2 mb-1! text-sm md:text-base">
                   Bahtera Arta Niaga adalah perusahaan yang bergerak<br />di bidang elektronik dan informasi teknologi.
@@ -162,8 +163,8 @@ export default function Home() {
                 </div>
               </ScrollReveal>
             </div>
-            <div className="hero-content mt-2">
-              <h1 className="fade-in-up delay-1 text-4xl md:text-6xl mb-4!">YOUR TRUSTED<br />PARTNER IN<br />IT SOLUTION</h1>
+            <div className="mt-12 leading-[1.05] leading-snug">
+              <h1 className="fade-in-up delay-1 text-3xl md:text-4xl mb-2!">YOUR TRUSTED<br />PARTNER IN<br />IT SOLUTION</h1>
             </div>
 
           </header>

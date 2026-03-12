@@ -29,7 +29,7 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image text-to-white"/>
+          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image brightness-0 invert"/>
         </Link>
 
         {/* Center: Desktop internal links (Absolutely centered, doesn't affect flex width) */}
