@@ -29,14 +29,23 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={80} height={60} className="logo-image text-to-white"/>
+          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image text-to-white"/>
         </Link>
 
+        {/* Center: Desktop internal links (Absolutely centered, doesn't affect flex width) */}
+        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex gap-8 items-center text-black">
+          <a href="#features" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
+          <a href="#testimonials" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
+          <a href="#faq" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+        </div>
+
         <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
-          <a href="#features" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-          <a href="#testimonials" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
-          <a href="#faq" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-          <a href="#download" className="btn btn-primary btn-sm" onClick={() => setIsMobileMenuOpen(false)}>
+          {/* Mobile links only (hidden on desktop via css or overwritten) */}
+          <a href="#features" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
+          <a href="#testimonials" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
+          <a href="#faq" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+          
+          <a href="#download" className="btn btn-primary btn-sm ml-auto" onClick={() => setIsMobileMenuOpen(false)}>
             Get Started
           </a>
         </div>
