@@ -163,8 +163,8 @@ export default function Home() {
                 </div>
               </ScrollReveal>
             </div>
-            <div className="mt-12 leading-[1.05] leading-snug">
-              <h1 className="fade-in-up delay-1 text-3xl md:text-4xl mb-2!">YOUR TRUSTED<br />PARTNER IN<br />IT SOLUTION</h1>
+            <div className="mt-12 leading-[1.05]">
+              <h2 className="fade-in-up delay-1 md:text-4xl mb-2!">YOUR TRUSTED<br />PARTNER IN<br />IT SOLUTION</h2>
             </div>
 
           </header>
@@ -288,15 +288,6 @@ export default function Home() {
                   </div>
                 </div>
               </ScrollReveal>
-              <ScrollReveal delayClass="delay-1">
-                <div className="testimonial-card">
-                  <p className="testimonial-text">&quot;This is weirdly satisfying. It makes me feel like I&apos;m finally not wasting my time and doing something useful.&quot;</p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar asset-placeholder xs"></div>
-                    <span className="author-name">Evan</span>
-                  </div>
-                </div>
-              </ScrollReveal>
             </div>
           </section>
         </div>
@@ -327,7 +318,6 @@ export default function Home() {
             <ScrollReveal className="section-header">
               <h2 className="font-bold w-full text-7xl">Get In Touch</h2>
               <FaqSection />
-              <FAQAccordion />
             </ScrollReveal>
           </section>
         </div>

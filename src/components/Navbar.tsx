@@ -29,11 +29,11 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image brightness-0 invert"/>
+          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image pb-10! brightness-0 invert"/>
         </Link>
 
-        {/* Center: Desktop internal links (Absolutely centered, doesn't affect flex width) */}
-        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex gap-8 items-center text-black">
+        {/* Center: Desktop internal links */}
+        <div className="hidden pb-10! md:flex gap-10 items-center text-black">
           <a href="#features" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
           <a href="#testimonials" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
           <a href="#faq" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
@@ -45,7 +45,7 @@ export default function Navbar() {
           <a href="#testimonials" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
           <a href="#faq" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
           
-          <a href="#download" className="btn btn-primary btn-sm ml-auto" onClick={() => setIsMobileMenuOpen(false)}>
+          <a href="#download" className="btn btn-primary btn-sm" onClick={() => setIsMobileMenuOpen(false)}>
             Get Started
           </a>
         </div>
