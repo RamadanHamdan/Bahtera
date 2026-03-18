@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar ${isScrolled ? "nav-scrolled" : ""}`}>
-      <div className="nav-container">
+      <div className="nav-container fade-in-up">
         <Link 
           href="/" 
           className="logo" 
@@ -29,11 +29,11 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image pb-10! brightness-0 invert"/>
+          <Image src="/bahtera-logo.svg" alt="logo bahtera" width={50} height={40} className="logo-image brightness-0 invert"/>
         </Link>
 
         {/* Center: Desktop internal links */}
-        <div className="hidden pb-10! md:flex gap-10 items-center text-black">
+        <div className="hidden md:flex gap-10 items-center text-black">
           <a href="#features" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
           <a href="#testimonials" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
           <a href="#faq" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>

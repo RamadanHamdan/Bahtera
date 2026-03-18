@@ -2,66 +2,163 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FAQAccordion from "@/components/FAQAccordion";
 import ScrollReveal from "@/components/ScrollReveal";
 import Image from "next/image";
-import pengadaanImg from "@/assets/images/pengadaan.png";
-import purnajualImg from "@/assets/images/purnajual.png";
-import pelatihanImg from "@/assets/images/pelatihan.png";
-import bahteraImg from "@/assets/images/bahtera.png";
-import bahtera1Img from "@/assets/images/bahtera1.png";
-import bgBahteraImg from "@/assets/images/bg-bahtera.jpg";
-import bgBahtera2Img from "@/assets/images/bg-bahtera2.jpg";
-import bgBahtera9Img from "@/assets/images/bg-bahtera9.jpg";
-import ifpImg from "@/assets/images/ifp.png";
-import indoorImg from "@/assets/images/indoor.jpeg";
-import outdoorImg from "@/assets/images/outdoor.jpeg";
-import mrsImg from "@/assets/images/mrs.png";
-import gensetImg from "@/assets/images/genset.png";
-import { Card, CardFooter, Pagination } from "@heroui/react";
-import pcAioImg from "@/assets/images/pc-aio.jpeg";
-import { Input } from "@heroui/input";
-import { Textarea } from "@heroui/input";
-import { Image as HeroImage } from "@heroui/react";
+import { Card, CardFooter, NumberInput, Pagination, CardBody, Button, Form, Input, Textarea, Image as HeroImage } from "@heroui/react";
 import { createLayout } from 'animejs';
-import React from "react";
-import { CardBody, Avatar, Button } from "@heroui/react";
+import * as React from "react";
+import { TypingText, TypingTextCursor } from "@/components/animate-ui/primitives/texts/typing";
+import { EmblaOptionsType } from "embla-carousel";
+import { Code, CodeBlock, CodeHeader } from "@/components/animate-ui/components/animate/code";
+import { MotionCarousel } from "@/components/animate-ui/components/community/motion-carousel";
+import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 
+interface ShimmeringText {
+  wave : boolean;
+  duration : number;
+}
 
+interface TypingTextDemoProps {
+  delay: number;
+  holdDelay: number;
+  loop: boolean;
+  cursor: boolean;
+}
 
-export function FaqSection() {
-  const variants = ["bordered"] as const;
-
+export const ShimmeringTextDemo = ({
+  wave,
+  duration,
+}: ShimmeringTextDemoProps) => {
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-8 mb-12 grid-container">
-      {variants.map((variant) => (
-        <div key={variant} className="w-full max-w-sm flex flex-col gap-4">
-          <Input aria-label="Full Name" placeholder="Full Name" type="text" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-          <Input aria-label="Email" placeholder="Email" type="email" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-          <Input aria-label="Phone Number" placeholder="Phone Number" type="tel" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-          <Textarea aria-label="Message" placeholder="Message" type="text" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-        </div>
-      ))}
+    <ShimmeringText
+      key={`${wave}-${duration}`}
+      className="text-4xl font-semibold"
+      wave={wave}
+      duration={duration}
+      text="Shimmering Text"
+    />
+  );
+};
+
+export const TypingTextDemo = ({
+  delay,
+  holdDelay,
+  loop,
+  cursor,
+}: TypingTextDemoProps) => {
+  return (
+    <TypingText
+      key={`${delay}-${holdDelay}-${loop}-${cursor}`}
+      delay={delay}
+      holdDelay={holdDelay}
+      className="text-4xl font-semibold"
+      text="Typing Text component made with Motion. Highly customizable and easy to use."
+      loop={loop}
+    >
+      {cursor && <TypingTextCursor className="!h-8 !w-1 rounded-full ml-1" />}
+    </TypingText>
+  );
+};
+
+export const CarouselSection = () => {
+  const OPTIONS: EmblaOptionsType = { loop: true };
+  const SLIDE_COUNT = 12;
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+
+  return <MotionCarousel slides={SLIDES} options={OPTIONS} />;
+}
+
+
+export function SubmitSection() {
+  const [submit, setSubmit] = React.useState<null | Record<string, FormDataEntryValue>>(null);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+
+    setSubmit(data);
+  };
+  return (
+    <div className="w-full flex justify-center mt-12!">
+      <Form className="w-full max-w-sm flex flex-col items-center gap-8" onSubmit={onSubmit}>
+        <Input
+          isRequired
+          errorMessage="Please enter a valid email"
+          label="Email"
+          labelPlacement="outside"
+          name="email"
+          type="email"
+        />
+        <Input
+          isRequired
+          errorMessage="Please enter a valid name"
+          label="Name"
+          labelPlacement="outside"
+          name="name"
+          type="text"
+        />
+        <NumberInput
+          isRequired
+          errorMessage="Please enter a valid phone number"
+          label="Phone Number"
+          labelPlacement="outside"
+          name="phone"
+        />
+        <Input
+          isRequired
+          errorMessage="Please enter a valid message"
+          label="Message"
+          labelPlacement="outside"
+          name="message"
+        />
+        <Button type="submit" variant="bordered" className="w-full mt-1">
+          Submit
+        </Button>
+        {submit && (
+          <div className="text-small text-default-500 text-center">
+            You submitted: <code>{JSON.stringify(submit)}</code>
+          </div>
+        )}
+      </Form>
     </div>
   );
 }
+
+// export function FaqSection() {
+//   const variants = ["bordered"] as const;
+
+//   return (
+//     <div className="w-full flex flex-col items-center justify-center mt-8 mb-12 grid-container">
+//       {variants.map((variant) => (
+//         <div key={variant} className="w-full max-w-sm flex flex-col gap-4">
+//           <Input aria-label="Full Name" placeholder="Full Name" type="text" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
+//           <Input aria-label="Email" placeholder="Email" type="email" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
+//           <Input aria-label="Phone Number" placeholder="Phone Number" type="tel" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
+//           <Textarea aria-label="Message" placeholder="Message" type="text" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
 export default function Home() {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const products = React.useMemo(() => [
-    { name: "PC AIO", src: pcAioImg.src },
-    { name: "IFP", src: ifpImg.src },
-    { name: "Indoor LED", src: indoorImg.src },
-    { name: "Outdoor LED", src: outdoorImg.src },
-    { name: "MRS", src: mrsImg.src },
-    { name: "Genset", src: gensetImg.src },
-    { name: "PC AIO Model 2", src: pcAioImg.src },
-    { name: "IFP Model 2", src: ifpImg.src },
-    { name: "Indoor LED Model 2", src: indoorImg.src },
-    { name: "Outdoor LED Model 2", src: outdoorImg.src },
-    { name: "MRS Model 2", src: mrsImg.src },
-    { name: "Genset Model 2", src: gensetImg.src },
+    { name: "PC AIO", src: "/images/pc-aio.jpeg" },
+    { name: "IFP", src: "/images/ifp.png" },
+    { name: "Indoor LED", src: "/images/indoor.jpeg" },
+    { name: "Outdoor LED", src: "/images/outdoor.jpeg" },
+    { name: "MRS", src: "/images/mrs.png" },
+    { name: "Genset", src: "/images/genset.png" },
+    { name: "Acer", src: "/images/acer_baru.jpeg" },
+    { name: "Asus", src: "/images/asus.png" },
+    { name: "Axioo", src: "/images/axioo.png" },
+    { name: "DAC", src: "/images/DAC.jpeg" },
+    { name: "HP", src: "/images/HP.png" },
+    { name: "Lenovo", src: "/images/LENOVO.jpeg" },
   ], []);
 
   const itemsPerPage = 6;
@@ -137,25 +234,27 @@ export default function Home() {
         {/* Hero Section — Card 1 */}
         <div className="page-card">
           <header
-            className="hero"
+            className="hero fade-in"
             id="home"
             style={{
-              backgroundImage: `url(${bgBahteraImg.src})`,
+              backgroundImage: "url('/images/bg-bahtera.jpg')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               backgroundBlendMode: 'inherit',
-              backgroundColor: 'rgba(37, 45, 104, 0.8)',
+              backgroundColor: 'rgba(37, 45, 104, 0.4)',
             }}
           >
             {/* Hero Image */}
             <div className="fade-in mt-1! delay-4 items-center">
               <ScrollReveal>
                 <div className="w-full flex justify-center">
-                  <HeroImage alt="Company Profile Image" src={bahtera1Img.src} className="w-[420px] md:w-[350px] h-auto mb-1! mt-2! object-contain" />
+                  <HeroImage alt="Company Profile Image" src="/images/bahtera1.png" className="w-[420px] md:w-[350px] h-auto mb-1! mt-2! object-contain" />
                 </div>
                 <p className="hero-subtitle fade-in-up delay-2 mt-2 mb-1! text-sm md:text-base">
-                  Bahtera Arta Niaga adalah perusahaan yang bergerak<br />di bidang elektronik dan informasi teknologi.
+                  <ShimmeringText className="fade-in-up delay-2 var(--color-neutral-500)" text="Bahtera Arta Niaga adalah perusahaan yang bergerak" />
+                  <br />
+                  <ShimmeringText className="fade-in-up delay-2 text-white" text="di bidang elektronik dan informasi teknologi."/>
                 </p>
                 <div className="hero-actions fade-in-up delay-3 mb-6!">
                   <a href="#download" className="btn btn-primary btn-sm">Get Started</a>
@@ -164,7 +263,11 @@ export default function Home() {
               </ScrollReveal>
             </div>
             <div className="mt-12 leading-[1.05]">
-              <h2 className="fade-in-up delay-1 md:text-4xl mb-2!">YOUR TRUSTED<br />PARTNER IN<br />IT SOLUTION</h2>
+              <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="YOUR TRUSTED" />
+              <br/>
+              <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="PARTNER IN" />
+              <br />
+              <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="IT SOLUTION" />
             </div>
 
           </header>
@@ -188,7 +291,7 @@ export default function Home() {
                   <h3>Solusi Pengadaan Komprehensif</h3>
                   <p className="feature-subtitle">Bahtera Arta Niaga menyediakan layanan pengadaan end-to-end untuk kebutuhan elektronik dan IT.</p>
                   <div className="asset-placeholder feature-asset sm">
-                    <Image src={pengadaanImg} alt="Pengadaan" width={300} height={300} />
+                    <Image src="/images/pengadaan.png" alt="Pengadaan" width={300} height={300} />
                   </div>
                 </div>
               </ScrollReveal>
@@ -204,7 +307,7 @@ export default function Home() {
                   <h3>Purna Jual</h3>
                   <p>Komitmen kami tidak berhenti pada pengadaan, tetapi berlanjut melalui dukungan purna jual yang responsif.</p>
                   <div className="asset-placeholder feature-asset sm">
-                    <Image src={purnajualImg} alt="Purnajual" width={300} height={300} />
+                    <Image src="/images/purnajual.png" alt="Purnajual" width={300} height={300} />
                   </div>
                 </div>
               </ScrollReveal>
@@ -220,7 +323,7 @@ export default function Home() {
                   <h3>Pelatihan &amp; Edukasi</h3>
                   <p>Pelatihan bagi setiap pelanggan kami untuk memaksimalkan manfaat dari produk dan layanan kami.</p>
                   <div className="asset-placeholder feature-asset sm">
-                    <Image src={pelatihanImg} alt="Pelatihan" width={300} height={300} />
+                    <Image src="/images/pelatihan.png" alt="Pelatihan" width={300} height={300} />
                   </div>
                 </div>
               </ScrollReveal>
@@ -239,14 +342,9 @@ export default function Home() {
               </div>
               <div className="md-asset flex-1 flex flex-col gap-4">
                 <div className="w-full gap-2 grid grid-cols-3 grid-rows-2">
-                  {currentProducts.map((product, index) => (
-                    <button key={`${product.name}-${index}`} data-duration="1000" className="item col p-0 border-none bg-transparent cursor-pointer overflow-hidden rounded-xl text-left focus:outline-none relative h-[160px]">
-                      <img alt={product.name} className="w-full h-full object-cover pointer-events-none" src={product.src} />
-                    </button>
-                  ))}
                 </div>
                 <div className="flex justify-center w-full">
-                  <Pagination total={totalPages} page={currentPage} onChange={setCurrentPage} color="primary" />
+                  <CarouselSection />
                 </div>
               </div>
             </div>
@@ -263,29 +361,19 @@ export default function Home() {
             <div className="testimonials-grid container">
               <ScrollReveal>
                 <div className="testimonial-card">
-                  <p className="testimonial-text">&quot;I never write reviews but I absolutely love this, 3 lessons in and I&apos;m very impressed.&quot;</p>
+                  <TypingText text="Your Trusted Partners In IT Solutions"/>
                   <div className="testimonial-author">
-                    <div className="author-avatar asset-placeholder xs"></div>
-                    <span className="author-name">Andrea</span>
                   </div>
                 </div>
               </ScrollReveal>
               <ScrollReveal delayClass="delay-1">
                 <div className="testimonial-card">
-                  <p className="testimonial-text">&quot;Really thoughtful and well presented content. Easy to learn important concepts on the go when you have a few minutes of down time.&quot;</p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar asset-placeholder xs"></div>
-                    <span className="author-name">Peter</span>
-                  </div>
+                  <TypingText text="Your Innovation Hub for IT Excellence"/>
                 </div>
               </ScrollReveal>
               <ScrollReveal>
                 <div className="testimonial-card">
-                  <p className="testimonial-text">&quot;Essential app for thinking logically and critically.&quot;</p>
-                  <div className="testimonial-author">
-                    <div className="author-avatar asset-placeholder xs"></div>
-                    <span className="author-name">Luke</span>
-                  </div>
+                  <TypingText text="Your Digital Transformation Starts Here"/>
                 </div>
               </ScrollReveal>
             </div>
@@ -297,7 +385,7 @@ export default function Home() {
           <section className="final-cta section">
             <ScrollReveal className="container">
               <h2 className="text-center mb-6">About Us</h2>
-              <Card className="max-w-4xl mx-auto w-full border border-white/10 shadow-md" style={{ background: 'rgba(0,0,0,0.3)' }}>
+              <Card className="max-w-8xl mx-auto w-full border-5 border-white/10 shadow-lg" style={{ background: 'rgba(0,0,0,0.3)' }}>
                 <CardBody className="p-12 md:p-12 text-center">
                   <p className="text-base md:text-lg text-default-300 leading-relaxed">
                     Spesialis terdepan di bidang pengadaan perangkat elektronik dan sistem IT yang memberdayakan transformasi digital organisasi modern.
@@ -314,14 +402,13 @@ export default function Home() {
 
         {/* FAQ / Contact — Card 6 */}
         <div className="page-card" id="faq" style={{ background: 'var(--bg-surface)' }}>
-          <section className="faq section">
+          <section className="faq section" style={{ flex: 1 }}>
             <ScrollReveal className="section-header">
-              <h2 className="font-bold w-full text-7xl">Get In Touch</h2>
-              <FaqSection />
+              <h2 className="font-bold w-full text-5xl">Get In Touch</h2>
+              <SubmitSection />
             </ScrollReveal>
           </section>
         </div>
-
         <Footer />
       </div>
     </main>
