@@ -1,5 +1,6 @@
 "use client";
 
+import { SendHandle } from "child_process";
 import { useState, useRef, useEffect } from "react";
 
 interface FAQItemProps {

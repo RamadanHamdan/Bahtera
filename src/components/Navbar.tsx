@@ -35,18 +35,18 @@ export default function Navbar() {
         {/* Center: Desktop internal links */}
         <div className="hidden md:flex gap-10 items-center text-black">
           <a href="#features" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-          <a href="#testimonials" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
+          <a href="#product" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Product</a>
           <a href="#faq" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
         </div>
 
         <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
           {/* Mobile links only (hidden on desktop via css or overwritten) */}
           <a href="#features" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-          <a href="#testimonials" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Testimonials</a>
+          <a href="#product" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Product</a>
           <a href="#faq" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
           
           <a href="#download" className="btn btn-primary btn-sm" onClick={() => setIsMobileMenuOpen(false)}>
-            Get Started
+            About Us
           </a>
         </div>
 

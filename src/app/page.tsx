@@ -7,23 +7,73 @@ import Image from "next/image";
 import { Card, CardFooter, NumberInput, Pagination, CardBody, Button, Form, Input, Textarea, Image as HeroImage } from "@heroui/react";
 import { createLayout } from 'animejs';
 import * as React from "react";
-import { TypingText, TypingTextCursor } from "@/components/animate-ui/primitives/texts/typing";
+import { SplittingText, type SplittingTextProps } from '@/components/animate-ui/primitives/texts/splitting';
+import { cn } from '@/lib/utils';
+
+import { TypingText } from '@/components/animate-ui/primitives/texts/typing';
 import { EmblaOptionsType } from "embla-carousel";
 import { Code, CodeBlock, CodeHeader } from "@/components/animate-ui/components/animate/code";
 import { MotionCarousel } from "@/components/animate-ui/components/community/motion-carousel";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 
-interface ShimmeringText {
-  wave : boolean;
-  duration : number;
+interface ShimmeringTextDemoProps {
+  wave: boolean;
+  duration: number;
 }
 
-interface TypingTextDemoProps {
+const ANIMATIONS: Record<
+  string,
+  {
+    initial: SplittingTextProps['initial'];
+    animate: SplittingTextProps['animate'];
+    transition: SplittingTextProps['transition'];
+  } | null
+> = {
+  default: null,
+  vibe: {
+    initial: { y: 50, scale: 0.5, opacity: 0, x: 50, rotate: 90 },
+    animate: { y: 0, scale: 1, opacity: 1, x: 0, rotate: 0 },
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+  writing: {
+    initial: { y: 10, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { type: 'spring', bounce: 0, duration: 2 },
+  },
+};
+
+interface SplittingTextDemoProps {
+  type: SplittingTextProps['type'];
   delay: number;
-  holdDelay: number;
-  loop: boolean;
-  cursor: boolean;
+  animation: keyof typeof ANIMATIONS;
 }
+
+export const SplittingTextDemo = ({
+  type,
+  delay,
+  animation,
+}: SplittingTextDemoProps) => {
+  return (
+    // @ts-expect-error
+    <SplittingText
+      key={`${type}-${delay}-${animation}`}
+      className={cn('text-4xl font-semibold', type === 'lines' && 'text-xl')}
+      type={type}
+      delay={delay}
+      initial={ANIMATIONS[animation]?.initial}
+      animate={ANIMATIONS[animation]?.animate}
+      transition={ANIMATIONS[animation]?.transition}
+      text={
+        type === 'lines'
+          ? [
+            'Introducing Splitting Text component',
+            'Made with Motion. Highly customizable and easy to use.',
+          ]
+          : 'Splitting Text'
+      }
+    />
+  );
+};
 
 export const ShimmeringTextDemo = ({
   wave,
@@ -40,26 +90,6 @@ export const ShimmeringTextDemo = ({
   );
 };
 
-export const TypingTextDemo = ({
-  delay,
-  holdDelay,
-  loop,
-  cursor,
-}: TypingTextDemoProps) => {
-  return (
-    <TypingText
-      key={`${delay}-${holdDelay}-${loop}-${cursor}`}
-      delay={delay}
-      holdDelay={holdDelay}
-      className="text-4xl font-semibold"
-      text="Typing Text component made with Motion. Highly customizable and easy to use."
-      loop={loop}
-    >
-      {cursor && <TypingTextCursor className="!h-8 !w-1 rounded-full ml-1" />}
-    </TypingText>
-  );
-};
-
 export const CarouselSection = () => {
   const OPTIONS: EmblaOptionsType = { loop: true };
   const SLIDE_COUNT = 12;
@@ -70,19 +100,42 @@ export const CarouselSection = () => {
 
 
 export function SubmitSection() {
-  const [submit, setSubmit] = React.useState<null | Record<string, FormDataEntryValue>>(null);
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = React.useState('');
+  const formRef = React.useRef<HTMLFormElement>(null);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatus('loading');
+    setErrorMsg('');
 
     const data = Object.fromEntries(new FormData(e.currentTarget));
 
-    setSubmit(data);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setStatus('success');
+        formRef.current?.reset();
+      } else {
+        setStatus('error');
+        setErrorMsg(result.error ?? 'Pengiriman gagal, coba lagi.');
+      }
+    } catch {
+      setStatus('error');
+      setErrorMsg('Terjadi kesalahan jaringan, coba lagi.');
+    }
   };
+
   return (
     <div className="w-full flex justify-center mt-12!">
-      <Form className="w-full max-w-sm flex flex-col items-center gap-8" onSubmit={onSubmit}>
+      <Form ref={formRef} className="w-full max-w-sm flex flex-col items-center gap-8" onSubmit={onSubmit}>
         <Input
           isRequired
           errorMessage="Please enter a valid email"
@@ -99,12 +152,13 @@ export function SubmitSection() {
           name="name"
           type="text"
         />
-        <NumberInput
+        <Input
           isRequired
           errorMessage="Please enter a valid phone number"
           label="Phone Number"
           labelPlacement="outside"
           name="phone"
+          type="tel"
         />
         <Input
           isRequired
@@ -113,12 +167,24 @@ export function SubmitSection() {
           labelPlacement="outside"
           name="message"
         />
-        <Button type="submit" variant="bordered" className="w-full mt-1">
-          Submit
+        <Button
+          type="submit"
+          variant="bordered"
+          className="w-full mt-1"
+          isLoading={status === 'loading'}
+          isDisabled={status === 'loading'}
+        >
+          {status === 'loading' ? 'Mengirim...' : 'Submit'}
         </Button>
-        {submit && (
-          <div className="text-small text-default-500 text-center">
-            You submitted: <code>{JSON.stringify(submit)}</code>
+
+        {status === 'success' && (
+          <div className="w-full text-center px-4 py-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm">
+            ✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.
+          </div>
+        )}
+        {status === 'error' && (
+          <div className="w-full text-center px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+            ❌ {errorMsg}
           </div>
         )}
       </Form>
@@ -254,7 +320,7 @@ export default function Home() {
                 <p className="hero-subtitle fade-in-up delay-2 mt-2 mb-1! text-sm md:text-base">
                   <ShimmeringText className="fade-in-up delay-2 var(--color-neutral-500)" text="Bahtera Arta Niaga adalah perusahaan yang bergerak" />
                   <br />
-                  <ShimmeringText className="fade-in-up delay-2 text-white" text="di bidang elektronik dan informasi teknologi."/>
+                  <ShimmeringText className="fade-in-up delay-2 text-white" text="di bidang elektronik dan informasi teknologi." />
                 </p>
                 <div className="hero-actions fade-in-up delay-3 mb-6!">
                   <a href="#download" className="btn btn-primary btn-sm">Get Started</a>
@@ -264,7 +330,7 @@ export default function Home() {
             </div>
             <div className="mt-12 leading-[1.05]">
               <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="YOUR TRUSTED" />
-              <br/>
+              <br />
               <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="PARTNER IN" />
               <br />
               <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="IT SOLUTION" />
@@ -288,8 +354,8 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-warehouse"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /><path d="M6 13h12" /><path d="M6 17h12" /></svg>
                     </div>
                   </div>
-                  <h3>Solusi Pengadaan Komprehensif</h3>
-                  <p className="feature-subtitle">Bahtera Arta Niaga menyediakan layanan pengadaan end-to-end untuk kebutuhan elektronik dan IT.</p>
+                  <SplittingText text="Solusi Pengadaan Komprehensif" />
+                  <SplittingText className="feature-subtitle" text="Bahtera Arta Niaga menyediakan layanan pengadaan end-to-end untuk kebutuhan elektronik dan IT." />
                   <div className="asset-placeholder feature-asset sm">
                     <Image src="/images/pengadaan.png" alt="Pengadaan" width={300} height={300} />
                   </div>
@@ -304,8 +370,8 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-wallet-cards"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2" /><path d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21" /></svg>
                     </div>
                   </div>
-                  <h3>Purna Jual</h3>
-                  <p>Komitmen kami tidak berhenti pada pengadaan, tetapi berlanjut melalui dukungan purna jual yang responsif.</p>
+                  <SplittingText text="Purna Jual" />
+                  <SplittingText className="feature-subtitle" text="Komitmen kami tidak berhenti pada pengadaan, tetapi berlanjut melalui dukungan purna jual yang responsif." />
                   <div className="asset-placeholder feature-asset sm">
                     <Image src="/images/purnajual.png" alt="Purnajual" width={300} height={300} />
                   </div>
@@ -320,8 +386,8 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.922 5.45a2 2 0 0 0-1.939 0L2.618 9.08a1 1 0 0 0-.02 1.838L10.08 13.08a2 2 0 0 0 1.939 0z" /><path d="M22 10v6M2 10l-1-1-9-5-9 5 9 5 9-5" /><path d="M6 12v5c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-5" /><path d="M6 12v5" /><path d="M18 12v5" /></svg>
                     </div>
                   </div>
-                  <h3>Pelatihan &amp; Edukasi</h3>
-                  <p>Pelatihan bagi setiap pelanggan kami untuk memaksimalkan manfaat dari produk dan layanan kami.</p>
+                  <SplittingText text="Pelatihan &amp; Edukasi" />
+                  <SplittingText className="feature-subtitle" text="Pelatihan bagi setiap pelanggan kami untuk memaksimalkan manfaat dari produk dan layanan kami." />
                   <div className="asset-placeholder feature-asset sm">
                     <Image src="/images/pelatihan.png" alt="Pelatihan" width={300} height={300} />
                   </div>
@@ -332,7 +398,7 @@ export default function Home() {
         </div>
 
         {/* Featured Products — Card 3 */}
-        <div className="page-card" style={{ background: 'var(--bg-surface-elevated)' }}>
+        <div className="page-card" id="product" style={{ background: 'var(--bg-surface-elevated)' }}>
           <ScrollReveal className="section container">
             <div className="cta-banner-content flex flex-col lg:flex-row items-center gap-8">
               <div className="flex-1 text-left shrink-0">
@@ -351,34 +417,33 @@ export default function Home() {
           </ScrollReveal>
         </div>
 
-        {/* Testimonials — Card 4 */}
+        {/* Testimonials — Card 4
         <div className="page-card" id="testimonials" style={{ background: 'var(--bg-surface)' }}>
           <section className="testimonials section">
             <ScrollReveal className="section-header">
-              <h2 className="section-title">Love From The Community</h2>
-              <p className="section-subtitle">What learners are saying</p>
+              <h2 className="section-title">Our Services</h2>
             </ScrollReveal>
             <div className="testimonials-grid container">
               <ScrollReveal>
                 <div className="testimonial-card">
-                  <TypingText text="Your Trusted Partners In IT Solutions"/>
+                  <TypingText text="Your Trusted Partners In IT Solutions" />
                   <div className="testimonial-author">
                   </div>
                 </div>
               </ScrollReveal>
               <ScrollReveal delayClass="delay-1">
                 <div className="testimonial-card">
-                  <TypingText text="Your Innovation Hub for IT Excellence"/>
+                  <TypingText text="Your Innovation Hub for IT Excellence" />
                 </div>
               </ScrollReveal>
               <ScrollReveal>
                 <div className="testimonial-card">
-                  <TypingText text="Your Digital Transformation Starts Here"/>
+                  <TypingText text="Your Digital Transformation Starts Here" />
                 </div>
               </ScrollReveal>
             </div>
           </section>
-        </div>
+        </div> */}
 
         {/* Final CTA — Card 5 */}
         <div className="page-card" id="download" style={{ background: 'linear-gradient(135deg, var(--bg-surface) 0%, #1a1a30 100%)' }}>
@@ -404,7 +469,7 @@ export default function Home() {
         <div className="page-card" id="faq" style={{ background: 'var(--bg-surface)' }}>
           <section className="faq section" style={{ flex: 1 }}>
             <ScrollReveal className="section-header">
-              <h2 className="font-bold w-full text-5xl">Get In Touch</h2>
+              <h2 className="font-bold w-full text-5xl">Contact Us</h2>
               <SubmitSection />
             </ScrollReveal>
           </section>
