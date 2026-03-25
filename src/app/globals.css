@@ -89,6 +89,7 @@ html {
 body {
     background-color: #e8eaf0;
     color: var(--text-primary);
+    font-family: 'Montserrat', 'Carlito', 'Trebuchet MS', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
 }
