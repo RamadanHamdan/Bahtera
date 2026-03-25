@@ -315,7 +315,7 @@ export default function Home() {
             <div className="fade-in mt-1! delay-4 items-center">
               <ScrollReveal>
                 <div className="w-full flex justify-center">
-                  <HeroImage alt="Company Profile Image" src="/images/bahtera1.png" className="w-[420px] md:w-[350px] h-auto mb-1! mt-2! object-contain" />
+                  <HeroImage alt="Company Profile Image" src="/images/bahtera1.png" className="w-[220px] sm:w-[280px] md:w-[380px] h-auto mb-1! mt-2! object-contain" />
                 </div>
                 <p className="hero-subtitle fade-in-up delay-2 mt-2 mb-1! text-sm md:text-base">
                   <ShimmeringText className="fade-in-up delay-2 var(--color-neutral-500)" text="Bahtera Arta Niaga adalah perusahaan yang bergerak" />
