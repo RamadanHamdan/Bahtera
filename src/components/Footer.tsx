@@ -18,7 +18,7 @@ export default function Footer() {
         </div>
 
         {/* Right: nav columns */}
-        <div className="flex flex-wrap gap-10 lg:gap-14 mt-10! pr-10!">
+        <div className="flex flex-wrap gap-10 lg:gap-14 mt-10! pl-10! pr-10!">
 
           {/* Address column intentionally left combined above; Contact Us */}
           <div className="footer-logo-text flex flex-col gap-3 lg:gap-6">

@@ -958,6 +958,10 @@ a {
         padding: 2.5rem 0 1.5rem;
     }
 
+    .footer-logo-text {
+        padding-left: 10px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;

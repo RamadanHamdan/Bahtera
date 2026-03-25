@@ -294,7 +294,6 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-
       <div className="page-wrapper">
 
         {/* Hero Section — Card 1 */}
@@ -417,7 +416,7 @@ export default function Home() {
           </ScrollReveal>
         </div>
 
-        {/* Testimonials — Card 4
+        {/* Testimonials — Card 4 */}
         <div className="page-card" id="testimonials" style={{ background: 'var(--bg-surface)' }}>
           <section className="testimonials section">
             <ScrollReveal className="section-header">
@@ -443,7 +442,7 @@ export default function Home() {
               </ScrollReveal>
             </div>
           </section>
-        </div> */}
+        </div>
 
         {/* Final CTA — Card 5 */}
         <div className="page-card" id="download" style={{ background: 'linear-gradient(135deg, var(--bg-surface) 0%, #1a1a30 100%)' }}>
