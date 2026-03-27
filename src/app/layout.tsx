@@ -9,7 +9,7 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Bahtera Arta Niaga",
-  description: "Learn critical thinking, cognitive biases, logical fallacies, and data literacy with interactive lessons.",
+  description: "",
 };
 
 export default function RootLayout({

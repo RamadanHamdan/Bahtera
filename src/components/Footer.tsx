@@ -1,3 +1,7 @@
+"use client";
+
+import { CircleArrowUp } from "lucide-react";
+
 export default function Footer() {
   return (
     <footer className="w-full bg-[#919ccf] rounded-[16px] px-1 py-1 flex flex-col gap-10">
@@ -9,11 +13,11 @@ export default function Footer() {
         <div className="flex flex-col gap-10">
           <span className="logo-text text-sm font-bold text-white mt-10! pl-10!">Bahtera Arta Niaga</span>
           <a
-            href="https://www.google.com/maps/search/Jl.+Cibaduyut+Raya+Cluster+Cibaduyut+No.+7,+Kel.+Cibaduyut+Wetan,+Kec.+Bojongloa+Kidul,+Kota+Bandung,+Provinsi+Jawa+Barat,+Kode+Pos:+40238/@-6.9603898,107.5914385,18z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMwNC4xIKXMDSoASAFQAw%3D%3D"
+            href="https://maps.app.goo.gl/qpiwqnMYoXebvwnC6"
             className="text-xs text-[#52525b] max-w-[180px] leading-relaxed pl-10!"
           >
-            Jl. Cibaduyut Raya, Cluster Cibaduyut No. 7,<br />
-            Bojongloa Kidul, Bandung 40238
+            Jl. K.H. Ahmad Dahlan No.20, Malabar, Kec.<br />
+            Lengkong, Kota Bandung, Jawa Barat 40262
           </a>
         </div>
 
@@ -40,9 +44,14 @@ export default function Footer() {
       {/* Divider */}
       <div className="border-t border-white/[0.08]" />
 
-      {/* Copyright */}
-      <p className="text-sm text-[#52525b] pl-9! mb-10!">&copy; 2026 Bahtera Arta Niaga. All rights reserved.</p>
-
+      {/* Copyright + Back to Top */}
+      <div className="flex items-center justify-between pl-9! pr-9! mb-10!">
+        <p className="text-sm text-[#52525b]">&copy; 2026 Bahtera Arta Niaga. All rights reserved.</p>
+        <CircleArrowUp
+          className="footer-back-to-top cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
+      </div>
     </footer>
   );
 }

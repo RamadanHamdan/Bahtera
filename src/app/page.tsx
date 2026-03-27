@@ -3,18 +3,23 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import Image from "next/image";
-import { Card, CardFooter, NumberInput, Pagination, CardBody, Button, Form, Input, Textarea, Image as HeroImage } from "@heroui/react";
+
+import { Button, Form, Input, Image as HeroImage } from "@heroui/react";
 import { createLayout } from 'animejs';
 import * as React from "react";
 import { SplittingText, type SplittingTextProps } from '@/components/animate-ui/primitives/texts/splitting';
 import { cn } from '@/lib/utils';
 
-import { TypingText } from '@/components/animate-ui/primitives/texts/typing';
+
 import { EmblaOptionsType } from "embla-carousel";
-import { Code, CodeBlock, CodeHeader } from "@/components/animate-ui/components/animate/code";
+
 import { MotionCarousel } from "@/components/animate-ui/components/community/motion-carousel";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
+import WhatWeOffer from "@/components/WhatWeOffer";
+import Product from "@/components/Product";
+import Contact from "@/components/Contact";
+import OurServices from "@/components/OurServices";
+import About from "@/components/About";
 
 interface ShimmeringTextDemoProps {
   wave: boolean;
@@ -54,7 +59,7 @@ export const SplittingTextDemo = ({
   animation,
 }: SplittingTextDemoProps) => {
   return (
-    // @ts-expect-error
+    // @ts-expect-error SplittingText props type mismatch with optional animation fields
     <SplittingText
       key={`${type}-${delay}-${animation}`}
       className={cn('text-4xl font-semibold', type === 'lines' && 'text-xl')}
@@ -192,23 +197,6 @@ export function SubmitSection() {
   );
 }
 
-// export function FaqSection() {
-//   const variants = ["bordered"] as const;
-
-//   return (
-//     <div className="w-full flex flex-col items-center justify-center mt-8 mb-12 grid-container">
-//       {variants.map((variant) => (
-//         <div key={variant} className="w-full max-w-sm flex flex-col gap-4">
-//           <Input aria-label="Full Name" placeholder="Full Name" type="text" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-//           <Input aria-label="Email" placeholder="Email" type="email" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-//           <Input aria-label="Phone Number" placeholder="Phone Number" type="tel" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-//           <Textarea aria-label="Message" placeholder="Message" type="text" variant={variant} classNames={{ inputWrapper: "bg-white", input: "text-black dark:text-black placeholder:text-black/20 dark:placeholder:text-black/20" }} />
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
 export default function Home() {
   const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -317,7 +305,7 @@ export default function Home() {
                   <HeroImage alt="Company Profile Image" src="/images/bahtera1.png" className="w-[220px] sm:w-[280px] md:w-[380px] h-auto mb-1! mt-2! object-contain" />
                 </div>
                 <p className="hero-subtitle fade-in-up delay-2 mt-2 mb-1! text-sm md:text-base">
-                  <ShimmeringText className="fade-in-up delay-2 var(--color-neutral-500)" text="Bahtera Arta Niaga adalah perusahaan yang bergerak" />
+                  <ShimmeringText className="fade-in-up delay-2 var(--color-white)" text="Bahtera Arta Niaga adalah perusahaan yang bergerak" />
                   <br />
                   <ShimmeringText className="fade-in-up delay-2 text-white" text="di bidang elektronik dan informasi teknologi." />
                 </p>
@@ -339,140 +327,20 @@ export default function Home() {
         </div>
 
         {/* Features Section — Card 2 */}
-        <div className="page-card" id="features" style={{ background: 'var(--bg-surface)' }}>
-          <section className="features section">
-            <div className="section-header">
-              <h2 className="section-title">What We Offer</h2>
-            </div>
-            <div className="features-grid container">
-              {/* Feature 1 */}
-              <ScrollReveal>
-                <div className="feature-card">
-                  <div className="feature-icon">
-                    <div className="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-warehouse"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /><path d="M6 13h12" /><path d="M6 17h12" /></svg>
-                    </div>
-                  </div>
-                  <SplittingText text="Solusi Pengadaan Komprehensif" />
-                  <SplittingText className="feature-subtitle" text="Bahtera Arta Niaga menyediakan layanan pengadaan end-to-end untuk kebutuhan elektronik dan IT." />
-                  <div className="asset-placeholder feature-asset sm">
-                    <Image src="/images/pengadaan.png" alt="Pengadaan" width={300} height={300} />
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              {/* Feature 2 */}
-              <ScrollReveal delayClass="delay-1">
-                <div className="feature-card">
-                  <div className="feature-icon">
-                    <div className="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-wallet-cards"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2" /><path d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21" /></svg>
-                    </div>
-                  </div>
-                  <SplittingText text="Purna Jual" />
-                  <SplittingText className="feature-subtitle" text="Komitmen kami tidak berhenti pada pengadaan, tetapi berlanjut melalui dukungan purna jual yang responsif." />
-                  <div className="asset-placeholder feature-asset sm">
-                    <Image src="/images/purnajual.png" alt="Purnajual" width={300} height={300} />
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              {/* Feature 3 */}
-              <ScrollReveal>
-                <div className="feature-card">
-                  <div className="feature-icon">
-                    <div className="icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.922 5.45a2 2 0 0 0-1.939 0L2.618 9.08a1 1 0 0 0-.02 1.838L10.08 13.08a2 2 0 0 0 1.939 0z" /><path d="M22 10v6M2 10l-1-1-9-5-9 5 9 5 9-5" /><path d="M6 12v5c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-5" /><path d="M6 12v5" /><path d="M18 12v5" /></svg>
-                    </div>
-                  </div>
-                  <SplittingText text="Pelatihan &amp; Edukasi" />
-                  <SplittingText className="feature-subtitle" text="Pelatihan bagi setiap pelanggan kami untuk memaksimalkan manfaat dari produk dan layanan kami." />
-                  <div className="asset-placeholder feature-asset sm">
-                    <Image src="/images/pelatihan.png" alt="Pelatihan" width={300} height={300} />
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-        </div>
+        <WhatWeOffer />
+       
 
         {/* Featured Products — Card 3 */}
-        <div className="page-card" id="product" style={{ background: 'var(--bg-surface-elevated)' }}>
-          <ScrollReveal className="section container">
-            <div className="cta-banner-content flex flex-col lg:flex-row items-center gap-8">
-              <div className="flex-1 text-left shrink-0">
-                <h2>Featured Product</h2>
-                <p>Maksimalkan produktivitas bisnis Anda dengan solusi teknologi informasi terintegrasi. Kami menawarkan produk unggulan seperti panel interaktif definisi tinggi dan sistem manajemen rapat canggih untuk memastikan setiap detik kerja Anda lebih bernilai.
-                  Jelajahi koleksi kami dan temukan cara baru untuk bekerja lebih cerdas.</p>
-              </div>
-              <div className="md-asset flex-1 flex flex-col gap-4">
-                <div className="w-full gap-2 grid grid-cols-3 grid-rows-2">
-                </div>
-                <div className="flex justify-center w-full">
-                  <CarouselSection />
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
+       <Product />
 
         {/* Testimonials — Card 4 */}
-        <div className="page-card" id="testimonials" style={{ background: 'var(--bg-surface)' }}>
-          <section className="testimonials section">
-            <ScrollReveal className="section-header">
-              <h2 className="section-title">Our Services</h2>
-            </ScrollReveal>
-            <div className="testimonials-grid container">
-              <ScrollReveal>
-                <div className="testimonial-card">
-                  <TypingText text="Your Trusted Partners In IT Solutions" />
-                  <div className="testimonial-author">
-                  </div>
-                </div>
-              </ScrollReveal>
-              <ScrollReveal delayClass="delay-1">
-                <div className="testimonial-card">
-                  <TypingText text="Your Innovation Hub for IT Excellence" />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal>
-                <div className="testimonial-card">
-                  <TypingText text="Your Digital Transformation Starts Here" />
-                </div>
-              </ScrollReveal>
-            </div>
-          </section>
-        </div>
+        <OurServices />
 
         {/* Final CTA — Card 5 */}
-        <div className="page-card" id="download" style={{ background: 'linear-gradient(135deg, var(--bg-surface) 0%, #1a1a30 100%)' }}>
-          <section className="final-cta section">
-            <ScrollReveal className="container">
-              <h2 className="text-center mb-6">About Us</h2>
-              <Card className="max-w-8xl mx-auto w-full border-5 border-white/10 shadow-lg" style={{ background: 'rgba(0,0,0,0.3)' }}>
-                <CardBody className="p-12 md:p-12 text-center">
-                  <p className="text-base md:text-lg text-default-300 leading-relaxed">
-                    Spesialis terdepan di bidang pengadaan perangkat elektronik dan sistem IT yang memberdayakan transformasi digital organisasi modern.
-                    Kami menghadirkan solusi teknologi konkret melalui proses pengadaan yang terstruktur, efisien dan tepat sasaran.
-                  </p>
-                </CardBody>
-                <CardFooter className="justify-center pt-0 pb-6">
-                  <p className="font-bold text-white tracking-wider uppercase text-sm">Bahtera Arta Niaga</p>
-                </CardFooter>
-              </Card>
-            </ScrollReveal>
-          </section>
-        </div>
+        <About />
 
         {/* FAQ / Contact — Card 6 */}
-        <div className="page-card" id="faq" style={{ background: 'var(--bg-surface)' }}>
-          <section className="faq section" style={{ flex: 1 }}>
-            <ScrollReveal className="section-header">
-              <h2 className="font-bold w-full text-5xl">Contact Us</h2>
-              <SubmitSection />
-            </ScrollReveal>
-          </section>
-        </div>
+        <Contact />
         <Footer />
       </div>
     </main>

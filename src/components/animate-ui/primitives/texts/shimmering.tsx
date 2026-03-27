@@ -16,8 +16,8 @@ function ShimmeringText({
   duration = 1,
   transition,
   wave = false,
-  color = 'var(--color-neutral-500)',
-  shimmeringColor = 'var(--color-neutral-300)',
+  color = 'var(--color-white)',
+  shimmeringColor = 'var(--accent-primary)',
   ...props
 }: ShimmeringTextProps) {
   return (
@@ -45,20 +45,20 @@ function ShimmeringText({
           initial={{
             ...(wave
               ? {
-                  scale: 1,
-                  rotateY: 0,
-                }
+                scale: 1,
+                rotateY: 0,
+              }
               : {}),
             color: 'var(--color)',
           }}
           animate={{
             ...(wave
               ? {
-                  x: [0, 5, 0],
-                  y: [0, -5, 0],
-                  scale: [1, 1.1, 1],
-                  rotateY: [0, 15, 0],
-                }
+                x: [0, 5, 0],
+                y: [0, -5, 0],
+                scale: [1, 1.1, 1],
+                rotateY: [0, 15, 0],
+              }
               : {}),
             color: ['var(--color)', 'var(--shimmering-color)', 'var(--color)'],
           }}

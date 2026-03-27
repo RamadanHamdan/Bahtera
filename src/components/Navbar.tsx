@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,6 +19,46 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
+  const handleFeaturesClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const el = document.getElementById('features');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    history.pushState(null, '', '/whatweoffer');
+  };
+
+  const handleProductClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const el = document.getElementById('product');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    history.pushState(null, '', '/product');
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const el = document.getElementById('contact');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    history.pushState(null, '', '/contact');
+  };
+
+  const handleAboutClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const el = document.getElementById('about');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    history.pushState(null, '', '/about');
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? "nav-scrolled" : ""}`}>
       <div className="nav-container fade-in-up">
@@ -34,19 +75,18 @@ export default function Navbar() {
 
         {/* Center: Desktop internal links */}
         <div className="hidden md:flex gap-10 items-center text-black">
-          <a href="#features" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-          <a href="#product" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>Product</a>
-          <a href="#faq" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+          <a href="/whatweoffer" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleFeaturesClick}>Features</a>
+          <a href="/product" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleProductClick}>Product</a>
+          <a href="/about" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleAboutClick}>About Us</a>
         </div>
 
         <div className={`nav-links ${isMobileMenuOpen ? "active" : ""}`}>
-          {/* Mobile links only (hidden on desktop via css or overwritten) */}
-          <a href="#features" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-          <a href="#product" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>Product</a>
-          <a href="#faq" className="md:hidden" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+          <a href="/whatweoffer" className="md:hidden" onClick={handleFeaturesClick}>Features</a>
+          <a href="/product" className="md:hidden" onClick={handleProductClick}>Product</a>
+          <a href="/about" className="md:hidden" onClick={handleAboutClick}>About Us</a>
           
-          <a href="#download" className="btn btn-primary btn-sm" onClick={() => setIsMobileMenuOpen(false)}>
-            About Us
+          <a href="/contact" className="btn btn-primary btn-sm" onClick={handleContactClick}>
+            Contact Us
           </a>
         </div>
 
