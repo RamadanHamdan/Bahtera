@@ -3,16 +3,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-
 import { Button, Form, Input, Image as HeroImage } from "@heroui/react";
 import { createLayout } from 'animejs';
 import * as React from "react";
 import { SplittingText, type SplittingTextProps } from '@/components/animate-ui/primitives/texts/splitting';
 import { cn } from '@/lib/utils';
-
-
 import { EmblaOptionsType } from "embla-carousel";
-
 import { MotionCarousel } from "@/components/animate-ui/components/community/motion-carousel";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 import WhatWeOffer from "@/components/WhatWeOffer";
@@ -325,21 +321,10 @@ export default function Home() {
 
           </header>
         </div>
-
-        {/* Features Section — Card 2 */}
         <WhatWeOffer />
-       
-
-        {/* Featured Products — Card 3 */}
        <Product />
-
-        {/* Testimonials — Card 4 */}
         <OurServices />
-
-        {/* Final CTA — Card 5 */}
         <About />
-
-        {/* FAQ / Contact — Card 6 */}
         <Contact />
         <Footer />
       </div>
