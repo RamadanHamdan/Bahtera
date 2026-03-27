@@ -194,7 +194,7 @@ export function SubmitSection() {
 }
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage] = React.useState(1);
 
   const products = React.useMemo(() => [
     { name: "PC AIO", src: "/images/pc-aio.jpeg" },
