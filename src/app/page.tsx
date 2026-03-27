@@ -300,23 +300,25 @@ export default function Home() {
                 <div className="w-full flex justify-center">
                   <HeroImage alt="Company Profile Image" src="/images/bahtera1.png" className="w-[220px] sm:w-[280px] md:w-[380px] h-auto mb-1! mt-2! object-contain" />
                 </div>
-                <p className="hero-subtitle fade-in-up delay-2 mt-2 mb-1! text-sm md:text-base">
-                  <ShimmeringText className="fade-in-up delay-2 var(--color-white)" text="Bahtera Arta Niaga adalah perusahaan yang bergerak" />
+                <p className="hero-subtitle fade-in-up delay-4 mt-2 mb-1! text-sm md:text-base">
+                  <ShimmeringText className="fade-in-up delay-4 var(--color-white)" text="Bahtera Arta Niaga adalah perusahaan" />
                   <br />
-                  <ShimmeringText className="fade-in-up delay-2 text-white" text="di bidang elektronik dan informasi teknologi." />
+                  <ShimmeringText className="fade-in-up delay-4 text-white" text="yang bergerak di bidang elektronik" />
+                  <br />
+                  <ShimmeringText className="fade-in-up delay-4 text-white" text="dan informasi teknologi." />
                 </p>
-                <div className="hero-actions fade-in-up delay-3 mb-6!">
+                <div className="hero-actions fade-in-up delay-4 mb-6!">
                   <a href="#download" className="btn btn-primary btn-sm">Get Started</a>
                   <a href="#features" className="btn btn-secondary btn-sm">Our Services</a>
                 </div>
               </ScrollReveal>
             </div>
-            <div className="mt-12 leading-[1.05]">
-              <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="YOUR TRUSTED" />
+            <div className="mt-12">
+              <ShimmeringText className="fade-in-up delay-4 md:text-4xl mb-2! text-white" text="YOUR TRUSTED" />
               <br />
-              <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="PARTNER IN" />
+              <ShimmeringText className="fade-in-up delay-4 md:text-4xl mb-2! text-white" text="PARTNER IN" />
               <br />
-              <ShimmeringText className="fade-in-up delay-2 md:text-4xl mb-2! text-white" text="IT SOLUTION" />
+              <ShimmeringText className="fade-in-up delay-4 md:text-4xl mb-2! text-white" text="IT SOLUTION" />
             </div>
 
           </header>
