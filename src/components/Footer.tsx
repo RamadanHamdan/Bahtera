@@ -48,25 +48,28 @@ export default function Footer() {
           {/* Support By */}
           <div className="footer-logo-text flex flex-col gap-3 lg:gap-10">
             <h4 className="text-xl font-semibold text-[#52525b] mb-10!">Supported By</h4>
-
-            <PreviewCard>
-              <PreviewCardTrigger
-                render={
-                  <a
-                    className="size-25 items-center justify-center pl-2!"
-                    href="https://mabel.co.id"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    title="Mabel.co.id"
-                  >
-                    <img
-                      src="/images/logo_mabel.png"
-                      alt="Mabel"
-                    />
-                  </a>
-                }
-              />
-            </PreviewCard>
+            <div className="flex items-center gap-4 -ml-2">
+              <PreviewCard>
+                <PreviewCardTrigger
+                  render={
+                    <a
+                      className="w-[65px] h-[65px] flex items-center justify-center"
+                      href="https://mabel.co.id"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      title="Mabel.co.id"
+                    >
+                      <img
+                        src="/images/logo_mabel.png"
+                        alt="Mabel"
+                        className="object-contain"
+                      />
+                    </a>
+                  }
+                />
+              </PreviewCard>
+              <p className="text-sm text-[#ffffff] font-medium">Mabel.co.id</p>
+            </div>
           </div>
         </div>
       </div>
