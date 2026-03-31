@@ -26,6 +26,7 @@ const IMAGES = [
   { src: '/images/DAC.jpeg', label: 'DAC' },
   { src: '/images/HP.png', label: 'HP' },
   { src: '/images/LENOVO.jpeg', label: 'Lenovo' },
+  { src: '/images/mebeul.png', label: 'Mebeul' },
 ];
 
 type EmblaControls = {

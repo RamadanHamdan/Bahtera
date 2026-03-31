@@ -93,7 +93,7 @@ export const ShimmeringTextDemo = ({
 
 export const CarouselSection = () => {
   const OPTIONS: EmblaOptionsType = { loop: true };
-  const SLIDE_COUNT = 12;
+  const SLIDE_COUNT = 13;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
   return <MotionCarousel slides={SLIDES} options={OPTIONS} />;
@@ -209,6 +209,7 @@ export default function Home() {
     { name: "DAC", src: "/images/DAC.jpeg" },
     { name: "HP", src: "/images/HP.png" },
     { name: "Lenovo", src: "/images/LENOVO.jpeg" },
+    { name: "Mebeul", src: "/images/mebeul.png" }
   ], []);
 
   const itemsPerPage = 6;

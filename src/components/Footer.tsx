@@ -1,6 +1,13 @@
 "use client";
 
 import { CircleArrowUp } from "lucide-react";
+import {
+  PreviewCard,
+  PreviewCardTrigger,
+  PreviewCardPortal,
+  PreviewCardPositioner,
+  PreviewCardPopup,
+} from '@/components/animate-ui/primitives/base/preview-card';
 
 export default function Footer() {
   return (
@@ -11,7 +18,7 @@ export default function Footer() {
 
         {/* Left: Logo + address below */}
         <div className="flex flex-col gap-10">
-          <span className="logo-text text-sm font-bold text-white mt-10! pl-10!">Bahtera Arta Niaga</span>
+          <span className="logo-text text-sm font-semibold text-white mt-10! pl-10!">Bahtera Arta Niaga</span>
           <a
             href="https://maps.app.goo.gl/qpiwqnMYoXebvwnC6"
             className="text-xs text-[#52525b] max-w-[180px] leading-relaxed pl-10!"
@@ -22,22 +29,45 @@ export default function Footer() {
         </div>
 
         {/* Right: nav columns */}
-        <div className="flex flex-wrap gap-10 lg:gap-14 mt-10! pl-10! pr-10!">
+        <div className="flex flex-wrap gap-10 lg:gap-10 mt-12! pl-10! pr-10!">
 
           {/* Address column intentionally left combined above; Contact Us */}
-          <div className="footer-logo-text flex flex-col gap-3 lg:gap-6">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-[#52525b] mb-10!">Contact Us</h4>
+          <div className="footer-logo-text flex flex-col gap-3 lg:gap-10">
+            <h4 className="text-xl font-semibold text-[#52525b] mb-10!">Contact Us</h4>
             <a href="mailto:bartaniaga@gmail.com" className="text-sm text-[#ffffff] transition-colors">Email</a>
             <a href="https://wa.me/6285111443335" className="text-sm text-[#ffffff] transition-colors">WhatsApp</a>
           </div>
 
           {/* Support */}
-          <div className="footer-logo-text flex flex-col gap-3 lg:gap-6">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-[#52525b] mb-10!">Support</h4>
+          <div className="footer-logo-text flex flex-col gap-3 lg:gap-10">
+            <h4 className="text-xl font-semibold text-[#52525b] mb-10!">Support</h4>
             <a href="#" className="text-sm text-[#ffffff] transition-colors">Help Center</a>
             <a href="#" className="text-sm text-[#ffffff] transition-colors">Contact Us</a>
           </div>
 
+          {/* Support By */}
+          <div className="footer-logo-text flex flex-col gap-3 lg:gap-10">
+            <h4 className="text-xl font-semibold text-[#52525b] mb-10!">Supported By</h4>
+
+            <PreviewCard>
+              <PreviewCardTrigger
+                render={
+                  <a
+                    className="size-25 items-center justify-center pl-2!"
+                    href="https://mabel.co.id"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    title="Mabel.co.id"
+                  >
+                    <img
+                      src="/images/logo_mabel.png"
+                      alt="Mabel"
+                    />
+                  </a>
+                }
+              />
+            </PreviewCard>
+          </div>
         </div>
       </div>
 
@@ -52,6 +82,6 @@ export default function Footer() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         />
       </div>
-    </footer>
+    </footer >
   );
 }
