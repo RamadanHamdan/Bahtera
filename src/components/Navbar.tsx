@@ -59,6 +59,16 @@ export default function Navbar() {
     history.pushState(null, '', '/about');
   };
 
+  const handleOurServicesClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const el = document.getElementById('testimonials');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    history.pushState(null, '', '/testimonials');
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? "nav-scrolled" : ""}`}>
       <div className="nav-container fade-in-up">
@@ -77,6 +87,7 @@ export default function Navbar() {
         <div className="hidden md:flex gap-10 items-center text-black">
           <a href="/whatweoffer" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleFeaturesClick}>Features</a>
           <a href="/product" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleProductClick}>Product</a>
+          <a href="/testimonials" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleOurServicesClick}>Our Services</a>
           <a href="/about" className="text-sm font-medium hover:text-[#1a1a2e]" onClick={handleAboutClick}>About Us</a>
         </div>
 
@@ -84,6 +95,7 @@ export default function Navbar() {
           <a href="/whatweoffer" className="md:hidden" onClick={handleFeaturesClick}>Features</a>
           <a href="/product" className="md:hidden" onClick={handleProductClick}>Product</a>
           <a href="/about" className="md:hidden" onClick={handleAboutClick}>About Us</a>
+          <a href="/testimonials" className="md:hidden" onClick={handleOurServicesClick}>Our Services</a>
           
           <a href="/contact" className="btn btn-primary btn-sm" onClick={handleContactClick}>
             Contact Us

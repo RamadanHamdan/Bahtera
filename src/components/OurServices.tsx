@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { TypingText } from '@/components/animate-ui/primitives/texts/typing';
+import { PreviewCard, PreviewCardTrigger, PreviewCardPortal, PreviewCardPositioner, PreviewCardPopup } from '@/components/animate-ui/primitives/base/preview-card';
 
 export default function OurServices() {
     return (
