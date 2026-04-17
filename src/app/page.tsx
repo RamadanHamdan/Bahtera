@@ -296,39 +296,32 @@ export default function Home() {
             }}
           >
             {/* Hero Image */}
-            <div className="fade-in mt-1! delay-4 items-center">
+            <div className="fade-in mb-12! delay-4 flex flex-col items-start text-left w-full max-w-7xl mx-auto px-6 md:px-12">
               <ScrollReveal>
-                <div className="w-full flex justify-center">
-                  <HeroImage alt="Company Profile Image" src="/images/bahtera1.png" className="w-[220px] sm:w-[280px] md:w-[380px] h-auto mb-1! mt-2! object-contain" />
+                <div className="text-left! pl-22! w-full">
+                  <ShimmeringText className="fade-in-up delay-4 text-3xl md:text-6xl lg:text-4xl font-bold mb-2! text-white" text="YOUR TRUSTED PARTNER" />
+                  <br />
+                  <ShimmeringText className="fade-in-up delay-4 text-3xl md:text-6xl lg:text-4xl font-bold mb-4! text-[#00b4d8]" text="IN IT SOLUTIONS" />
                 </div>
-                <p className="hero-subtitle fade-in-up delay-4 mt-2 mb-1! text-sm md:text-base">
-                  <ShimmeringText className="fade-in-up delay-4 var(--color-white)" text="Bahtera Arta Niaga adalah perusahaan" />
-                  <br />
-                  <ShimmeringText className="fade-in-up delay-4 text-white" text="yang bergerak di bidang elektronik" />
-                  <br />
-                  <ShimmeringText className="fade-in-up delay-4 text-white" text="dan informasi teknologi." />
-                </p>
-                <div className="hero-actions fade-in-up delay-4 mb-6!">
-                  <a href="#download" className="btn btn-primary btn-sm">Get Started</a>
-                  <a href="#features" className="btn btn-secondary btn-sm">Our Services</a>
+                <div className="hero-actions fade-in-up delay-4 mb-6! text-left pl-22! w-full">
+                  <p className="fade-in-up delay-4 mt-4 mb-1! text-base md:text-xl text-left text-white max-w-3xl">
+                    <ShimmeringText className="fade-in-up delay-4 text-white" text="Spesialis terdepan di bidang pengadaan perangkat elektronik dan" />
+                    <br />
+                    <ShimmeringText className="fade-in-up delay-4 text-white" text="Sistem IT yang memberdayakan transformasi digital organisasi modern." />
+                  </p>
+                </div>
+                <div className="mt-4! gap-2! pl-22! flex items-center justify-start">
+                  <a href="#download" className="btn mt-1! btn-primary btn-sm">Get Started</a>
+                  <a href="#features" className="btn mt-1! btn-secondary btn-sm">Our Services</a>
                 </div>
               </ScrollReveal>
             </div>
-            <div className="mt-12">
-              <ShimmeringText className="fade-in-up delay-4 md:text-4xl mb-2! text-white" text="YOUR TRUSTED" />
-              <br />
-              <ShimmeringText className="fade-in-up delay-4 md:text-4xl mb-2! text-white" text="PARTNER IN" />
-              <br />
-              <ShimmeringText className="fade-in-up delay-4 md:text-4xl mb-2! text-white" text="IT SOLUTION" />
-            </div>
-
           </header>
         </div>
         <WhatWeOffer />
-       <Product />
+        <Product />
         <OurServices />
         <About />
-        <Contact />
         <Footer />
       </div>
     </main>

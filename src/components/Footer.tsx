@@ -55,22 +55,35 @@ export default function Footer() {
 
         {/* Left: Logo + address below */}
         <div className="flex flex-col lg:gap-2 mt-12! pl-10!">
-          <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-10!" text="Bahtera Arta Niaga" />
+          <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-6!" text="Kantor Pusat" />
           <a
             href="https://maps.app.goo.gl/qpiwqnMYoXebvwnC6"
-            className="text-sm text-[#52525b] mb-10! lg:mb-0! leading-relaxed max-w-[380px]"
+            className="text-sm text-[#52525b] leading-relaxed max-w-[380px]"
           >
-            Jl. K.H. Ahmad Dahlan<br />No.20, Malabar,<br /> Kec. Lengkong,<br />
-            Kota Bandung,<br /> Jawa Barat 40262
+            Jl. K.H. Ahmad Dahlan No.20, Malabar,
+            <br />
+            Kec. Lengkong, Kota Bandung, Jawa Barat 40262
           </a>
         </div>
 
+        <div className="flex flex-col lg:gap-2 mt-12!">
+          <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-4!" text="Bahtera Arta Niaga" />
+          <div className="flex flex-col justify-center items-center mb-8!">
+            Your Trusted Partner in IT Solutions.
+            <br />
+            Fokus pada penyediaan infrastruktur
+            <br />
+            teknologi mutakhir untuk sektor korporasi dan pemerintahan.
+          </div>
+        </div>
+
+
         {/* Right: nav columns */}
-        <div className="flex flex-wrap gap-8 lg:gap-4 mt-12! pl-10! pr-10!">
+        <div className="flex flex-wrap gap-8 lg:gap-4 mt-11! pl-10! pr-10!">
 
           {/* Address column intentionally left combined above; Contact Us */}
           <div className="flex flex-col lg:gap-2">
-            <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-10!" text="Company" />
+            <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-6!" text="Company" />
             <a href="/whatweoffer" className="text-sm text-[#ffffff] transition-colors" onClick={handleFeaturesClick}>Features</a>
             <a href="/product" className="text-sm text-[#ffffff] transition-colors" onClick={handleProductClick}>Product</a>
             <a href="/ourservices" className="text-sm text-[#ffffff] transition-colors" onClick={handleOurServicesClick}>Our Services</a>
@@ -79,7 +92,7 @@ export default function Footer() {
 
           {/* Support By */}
           <div className="flex flex-col lg:gap-2">
-            <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-10!" text="Support" />
+            <ShimmeringText className="fade-in-up delay-4 var(--color-white) text-lg font-semibold mb-6!" text="Support" />
             <a href="mailto:bartaniaga@gmail.com" className="text-sm text-[#ffffff] transition-colors">Email</a>
             <a href="https://wa.me/6285111443335" className="text-sm text-[#ffffff] transition-colors">WhatsApp</a>
           </div>

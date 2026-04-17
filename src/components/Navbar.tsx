@@ -97,7 +97,7 @@ export default function Navbar() {
           <a href="/about" className="md:hidden" onClick={handleAboutClick}>About Us</a>
           <a href="/testimonials" className="md:hidden" onClick={handleOurServicesClick}>Our Services</a>
           
-          <a href="/contact" className="btn btn-primary btn-sm" onClick={handleContactClick}>
+          <a href="https://wa.me/6285111443335" className="btn btn-primary btn-sm">
             Contact Us
           </a>
         </div>
