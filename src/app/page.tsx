@@ -3,7 +3,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Button, Form, Input, Image as HeroImage } from "@heroui/react";
 import { createLayout } from 'animejs';
 import * as React from "react";
 import { SplittingText, type SplittingTextProps } from '@/components/animate-ui/primitives/texts/splitting';
@@ -13,7 +12,7 @@ import { MotionCarousel } from "@/components/animate-ui/components/community/mot
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 import WhatWeOffer from "@/components/WhatWeOffer";
 import Product from "@/components/Product";
-import Contact from "@/components/Contact";
+
 import OurServices from "@/components/OurServices";
 import About from "@/components/About";
 
@@ -99,100 +98,6 @@ export const CarouselSection = () => {
   return <MotionCarousel slides={SLIDES} options={OPTIONS} />;
 }
 
-
-export function SubmitSection() {
-  const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMsg, setErrorMsg] = React.useState('');
-  const formRef = React.useRef<HTMLFormElement>(null);
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus('loading');
-    setErrorMsg('');
-
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (result.success) {
-        setStatus('success');
-        formRef.current?.reset();
-      } else {
-        setStatus('error');
-        setErrorMsg(result.error ?? 'Pengiriman gagal, coba lagi.');
-      }
-    } catch {
-      setStatus('error');
-      setErrorMsg('Terjadi kesalahan jaringan, coba lagi.');
-    }
-  };
-
-  return (
-    <div className="w-full flex justify-center mt-12!">
-      <Form ref={formRef} className="w-full max-w-sm flex flex-col items-center gap-8" onSubmit={onSubmit}>
-        <Input
-          isRequired
-          errorMessage="Please enter a valid email"
-          label="Email"
-          labelPlacement="outside"
-          name="email"
-          type="email"
-        />
-        <Input
-          isRequired
-          errorMessage="Please enter a valid name"
-          label="Name"
-          labelPlacement="outside"
-          name="name"
-          type="text"
-        />
-        <Input
-          isRequired
-          errorMessage="Please enter a valid phone number"
-          label="Phone Number"
-          labelPlacement="outside"
-          name="phone"
-          type="tel"
-        />
-        <Input
-          isRequired
-          errorMessage="Please enter a valid message"
-          label="Message"
-          labelPlacement="outside"
-          name="message"
-        />
-        <Button
-          type="submit"
-          variant="bordered"
-          className="w-full mt-1"
-          isLoading={status === 'loading'}
-          isDisabled={status === 'loading'}
-        >
-          {status === 'loading' ? 'Mengirim...' : 'Submit'}
-        </Button>
-
-        {status === 'success' && (
-          <div className="w-full text-center px-4 py-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm">
-            ✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.
-          </div>
-        )}
-        {status === 'error' && (
-          <div className="w-full text-center px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
-            ❌ {errorMsg}
-          </div>
-        )}
-      </Form>
-    </div>
-  );
-}
-
 export default function Home() {
   const [currentPage] = React.useState(1);
 
@@ -213,7 +118,6 @@ export default function Home() {
   ], []);
 
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const currentProducts = React.useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;

@@ -1,13 +1,6 @@
 "use client";
 
 import { CircleArrowUp } from "lucide-react";
-import {
-  PreviewCard,
-  PreviewCardTrigger,
-  PreviewCardPortal,
-  PreviewCardPositioner,
-  PreviewCardPopup,
-} from '@/components/animate-ui/primitives/base/preview-card';
 import { ShimmeringText } from "./animate-ui/primitives/texts/shimmering";
 
 export default function Footer() {

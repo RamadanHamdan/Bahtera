@@ -1,4 +1,4 @@
-import { SubmitSection } from "@/app/page";
+import SubmitSection from "@/components/SubmitSection";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Contact() {
