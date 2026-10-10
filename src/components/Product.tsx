@@ -1,8 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
-import { SplittingText } from "@/components/animate-ui/primitives/texts/splitting";
-import { MotionCarousel } from "@/components/animate-ui/components/community/motion-carousel";
-import { TypingText } from '@/components/animate-ui/primitives/texts/typing';
-import { CarouselSection } from "@/app/page";
+import CarouselSection from "./CarouselSection";
 
 export default function Product() {
     return (

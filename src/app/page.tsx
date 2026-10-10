@@ -7,8 +7,6 @@ import { createLayout } from 'animejs';
 import * as React from "react";
 import { SplittingText, type SplittingTextProps } from '@/components/animate-ui/primitives/texts/splitting';
 import { cn } from '@/lib/utils';
-import { EmblaOptionsType } from "embla-carousel";
-import { MotionCarousel } from "@/components/animate-ui/components/community/motion-carousel";
 import { ShimmeringText } from "@/components/animate-ui/primitives/texts/shimmering";
 import WhatWeOffer from "@/components/WhatWeOffer";
 import Product from "@/components/Product";
@@ -48,11 +46,7 @@ interface SplittingTextDemoProps {
   animation: keyof typeof ANIMATIONS;
 }
 
-export const SplittingTextDemo = ({
-  type,
-  delay,
-  animation,
-}: SplittingTextDemoProps) => {
+function SplittingTextDemo({type, delay, animation}: SplittingTextDemoProps) {
   return (
     // @ts-expect-error SplittingText props type mismatch with optional animation fields
     <SplittingText
@@ -75,10 +69,7 @@ export const SplittingTextDemo = ({
   );
 };
 
-export const ShimmeringTextDemo = ({
-  wave,
-  duration,
-}: ShimmeringTextDemoProps) => {
+ function ShimmeringTextDemo({wave, duration} : ShimmeringTextDemoProps) {
   return (
     <ShimmeringText
       key={`${wave}-${duration}`}
@@ -89,14 +80,6 @@ export const ShimmeringTextDemo = ({
     />
   );
 };
-
-export const CarouselSection = () => {
-  const OPTIONS: EmblaOptionsType = { loop: true };
-  const SLIDE_COUNT = 13;
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
-
-  return <MotionCarousel slides={SLIDES} options={OPTIONS} />;
-}
 
 export default function Home() {
   const [currentPage] = React.useState(1);
